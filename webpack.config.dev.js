@@ -5,7 +5,7 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        app: './entery.js',
+        app: './sample.entery.js',
     },
     output: {
         path: path.resolve('.'),
