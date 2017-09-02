@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import SampleApp from './scripts/sample.js';
+import App from '../scripts/app.js';
 
 ReactDOM.render(
-  <SampleApp />,
+  <App />,
   document.querySelector('#app') 
 );

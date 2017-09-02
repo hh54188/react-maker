@@ -1,32 +1,48 @@
 - docs
 - jest
 - public
+  - `apple-touch-icon.png`
+  - `tile-iwde.png`
+  - `tile.png`
+  - `browserconfig.xml`
+  - `crossdomain.xml`
+  - `favicon.ico`
+  - `humans.txt`
+  - `robots.txt`
 - src
   - components
+  - middlewares
+  - actions
+  - reducers
+  - `store.js`
   - data
     - models
     - queries
     - types
   - routes
+  - `app.js`
+  - `constant.js`
 - test
 - tools
 - `.editorconfig`: 用于帮助开发者在不同的编辑器中都保持相同的编码习惯 http://editorconfig.org
 - `.eslintrc.js`: 代码规范检测工具ESlint的配置文件 https://eslint.org/docs/user-guide/configuring
 - `.flowconfig`: Flow是Facebook推出的用于对Javascript代码进行数据类型检测工具，该文件是对该工具的配置文件 https://flow.org/en/docs/config/
-- `.gitattributes`
 - `.gitignore`: 项目中git应该忽略的文件
-- `.nycrc`
 - `.stylelintrc.js`: stylelint是用于样式代码规范检测的的工具，该文件是该工具的配置文件
-- `.travis.yml`
 - `CHANGELOG.md`: 项目的更新日志
 - `CONTRIBUTING.md`: 关于如何向该项目做出贡献
 - `Dockerfile`: Docker项目的配置文件
 - `jest.config.js`: Jest是Facebook推出的Javascript测试工具，该文件是该工具的配置文件 https://facebook.github.io/jest/
 - `LICENSE.txt`: 该项目使用的开源协议
+- `.gitattributes`
+- `.travis.yml`
+- `.nycrc`
 - `package-lock.json`
+- `yarn.lock`
 - `package.json`: 项目的描述文件
 - `README.md`: 项目文档
-- `yarn.lock`
 - `.env`: dotenv模块能够让项目在启动时从`.env`文件中加载变量到`process.env`中，该文件即用于存储模拟全局变量的数据 https://github.com/motdotla/dotenv
 - `.babelrc`: Javascript编译工具babel的配置文件
 - `Profile`: 该文件是Paas平台heroku部署项目需要的配置文件 https://devcenter.heroku.com/articles/heroku-local
+- `webpack.config.dev.js`
+- `webpack.config.prod.js`

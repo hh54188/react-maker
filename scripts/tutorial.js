@@ -50,6 +50,7 @@ const mapDispatchToProps = (dispatch) => {
      * 唯一修改 state 的方式就是通过触发 action
      * action 由 action creator 构造，
      * 本质上就是通过 dispath 方法构造一个 command
+     * { type: , payload: }
      * （command比event更合适，因为这里有 command hander
      * 而不涉及订阅和发布）
      */
@@ -63,11 +64,16 @@ const mapDispatchToProps = (dispatch) => {
 /**
  * connect 函数把 mapStateToProps 和 mapDispatchToProps 的返回值
  * 并把它们作为 Counter 组件的 props
- * connect 返回的是一个 wrapper component
+ * 
+ * 这种模式是HOC，通过组合的方式将一个组件封装为另一个组件，
+ * 最外层包裹的组件是 container component，内被封装的组件是 wrppered component
+ * connect 返回的是一个 enhance function，
+ * 再通过上面的HOC的模式重新封装 wrappered component
+ * 
  */
 Counter = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
-class SampleApp extends React.Component {
+class TutorialApp extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -84,4 +90,4 @@ class SampleApp extends React.Component {
   }
 }
 
-export default SampleApp;
+export default TutorialApp;
