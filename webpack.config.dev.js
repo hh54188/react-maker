@@ -5,15 +5,9 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = {
-    entry: () => {
-        const entryRelativePath = './entry/';
-        const entryFiles = fs.readdirSync(entryRelativePath);
-        const entryObj = {};
-        entryFiles.forEach((entryPath) => {
-            const entryName = entryPath.match(/(.*)\.entry\.js/)[1];
-            entryObj[entryName] =  entryRelativePath + entryPath;
-        });
-        return entryObj;
+    entry: {
+        app: './entry/app.entry.js',
+        tutorial: './entry/tutorial.entry.js'
     },
     output: {
         path: path.resolve('.'),
