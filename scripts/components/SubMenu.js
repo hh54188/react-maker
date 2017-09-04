@@ -56,10 +56,13 @@ class SubMenu extends React.Component {
               <Option value="Yiminghe">redux</Option>
             </Select>
           </FormItem>
-          <FormItem { ...formButtonLayout } label=" " >
-            <Button className="btn" type="primary" size="sm">重置</Button>
-            <Button icon="up" className="btn" size="sm">收起</Button>
-          </FormItem>          
+          <FormItem { ...formItemLayout } label="只显示已选项">
+            <Switch defaultChecked={false} />       
+          </FormItem>         
+          <FormItem { ...formButtonLayout }>
+            <Button className="btn" type="primary" size="default">重置</Button>
+            <Button icon="up" className="btn" size="default">收起</Button>
+          </FormItem>         
         </Form>
       </div>
     );

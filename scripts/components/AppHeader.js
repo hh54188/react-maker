@@ -13,10 +13,17 @@ class AppHeader extends React.Component {
   render() {
     return (
       <Header>
+        <div className="logo">
+          WEBPACK MAKER
+        </div>
         <Menu
           mode="horizontal"
           theme="dark"
-          style={{ lineHeight: '64px' }}
+          style={{ 
+            lineHeight: '64px',
+            display: 'flex',
+            justifyContent: 'flex-end' 
+          }}
         >
           <MenuItem key="mail">
             <Icon type="github" />

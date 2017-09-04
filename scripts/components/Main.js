@@ -22,6 +22,34 @@ import SubMenu from './SubMenu.js';
 
 import './Main.less';
 
+class FolderItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <Icon className="icon" type="folder" />
+        <span>Folder</span>
+      </div>
+    );
+  }
+}
+
+class FileItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <Icon className="icon" type="file" />
+        <span>File</span>
+      </div>
+    );
+  }
+}
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -38,28 +66,12 @@ class Main extends React.Component {
       <SubMenu />
       <Row>
         <Col span={12} offset={6}>
-          <Tree
-            checkable
-            defaultExpandedKeys={['0-0-0']}
-          >
-            <TreeNode
-              title={<div><Icon className="icon" type="folder" /><span>Parent</span></div>}
-              key="0-0"
-            >
-              <TreeNode title="parent 1-0" key="0-0-0">
-                <TreeNode
-                  title={<div><Icon className="icon" type="file" /><span>Leaf</span></div>}
-                  key="0-0-0-0" 
-                />            
-                <TreeNode title="leaf" key="0-0-0-1" />              
-                <TreeNode title="leaf" key="0-0-0-2" />
-              </TreeNode>
-              <TreeNode title="parent 1-1" key="0-0-1">
-                <TreeNode title="leaf" key="0-0-1-0" />
-              </TreeNode>
-              <TreeNode title="parent 1-2" key="0-0-2">
-                <TreeNode title="leaf" key="0-0-2-0" />
-                <TreeNode title="leaf" key="0-0-2-1" />
+          <Tree checkable>
+            <TreeNode title={<FolderItem />} >
+              <TreeNode title={<FolderItem />}>
+                <TreeNode title={<FileItem />} />            
+                <TreeNode title={<FileItem />} />            
+                <TreeNode title={<FileItem />} />            
               </TreeNode>
             </TreeNode>
           </Tree>
