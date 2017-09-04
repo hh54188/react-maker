@@ -38,7 +38,12 @@ class Counter extends React.Component {
     )
   }
 }
-
+/**
+ * mapStateToProps必须要时一个函数
+ * 它实际上的工作是订阅了Store的状态变化
+ * 并传导给组件
+ *  
+ */
 const mapStateToProps = (state) => {
   return { counter: state.counter };
 }
@@ -62,6 +67,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 /**
+ * 通俗一点来说，connect 就是将Redux flow/Container与React组件连接起来的桥梁
+ * Redux Contaienr中有你要的状态，action creator，你需要通过connect将它们导入
+ * React组件中
+ * 
  * connect 函数把 mapStateToProps 和 mapDispatchToProps 的返回值
  * 并把它们作为 Counter 组件的 props
  * 
