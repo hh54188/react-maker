@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
-import { createStore } from 'redux';
-
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 /** 
  * reducer是一个pure function, 没有任何副作用
  * 只依赖传入参数，并且根据参数返回唯一
@@ -11,6 +11,8 @@ import { createStore } from 'redux';
 const reducer = (state, action) => {
   switch(action.type) {
     case 'INCREMENT': return { counter: state.counter + 1 };
+    case 'FETCH_DATA_COMPLETE': console.log(action.payload); return state; break;
+    case 'FETCH_DATA_ERROR': console.log(action.payload); return state; break;
     default: return state;
   }
 }
@@ -22,11 +24,14 @@ const reducer = (state, action) => {
  * store代表着state, 但是是通过reducer
  * 当然你也可以传入处室状态state
  */
-const store = createStore(reducer, { counter: 0 });
+const store = createStore(reducer, { counter: 0 },  applyMiddleware(thunk));
 
 class Counter extends React.Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    this.props.fetchMockyData();
   }
   render() {
     const { counter, onIncrement } = this.props;
@@ -48,6 +53,26 @@ const mapStateToProps = (state) => {
   return { counter: state.counter };
 }
 
+/**
+ * actions
+ */
+const fetchMockyData = (url) => {
+  return function(dispatch) {
+    return fetch(new Request(url))
+      .then((result) => {
+        dispatch({
+          type: 'FETCH_DATA_COMPLETE',
+          payload: result,
+        });
+      }).catch((error) => {
+        dispatch({
+          type: 'FETCH_DATA_ERROR',
+          payload: error,
+        });
+      });
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     /**
@@ -63,7 +88,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: 'INCREMENT'
       });
-    }
+    },
+    fetchMockyData: () => dispatch(fetchMockyData('http://www.mocky.io/v2/59aec7601300004b060358d6'))
   }
 }
 /**

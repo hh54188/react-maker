@@ -55,7 +55,6 @@ class Main extends React.Component {
     super(props);
   }
   render() {
-
     const subMenuStyleObj = {
       display: 'flex',
       alignItems: 'center',

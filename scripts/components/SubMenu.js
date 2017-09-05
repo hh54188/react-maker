@@ -10,6 +10,15 @@ const { Option } = Select;
 class SubMenu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      collapse: true
+    }
+    this.onToggleShowOptions = this.onToggleShowOptions.bind(this);
+  }
+  onToggleShowOptions() {
+    this.setState({
+      collapse: !this.state.collapse
+    });
   }
   render() {
     const formItemLayout = {
@@ -28,40 +37,35 @@ class SubMenu extends React.Component {
         span: 7,
         offset: 5 
       }      
-    }  
+    }
+    const { collapse } = this.state;
     return (
-      <div className="sub-menu">
-        <Form style={{ width: '50%' }}>
+      <div className="sub-menu">    
+        <Form style={{ width: '960px' }}>
           <FormItem { ...formItemLayout } label="搜索目录或者文件名称">
             <Input />          
           </FormItem>
-          <FormItem
-            label="项目类型"
-            {...formItemLayout}
-          >
-            <Radio.Group defaultValue="horizontal" >
-              <Radio.Button value="horizontal">自定义</Radio.Button>
-              <Radio.Button value="vertical">最小</Radio.Button>
-              <Radio.Button value="inline">redux</Radio.Button>
-              <Radio.Button value="inline">所有</Radio.Button>
-            </Radio.Group>
-          </FormItem>            
-          <FormItem { ...formItemLayout } label="显示解释">
-            <Switch defaultChecked={true} />       
-          </FormItem>
-          <FormItem { ...formItemLayout } label="项目类型">
-            <Select defaultValue="lucy" style={{ width: 120 }} >
-              <Option value="jack">自定义</Option>
-              <Option value="lucy">最小</Option>
-              <Option value="Yiminghe">redux</Option>
-            </Select>
-          </FormItem>
-          <FormItem { ...formItemLayout } label="只显示已选项">
-            <Switch defaultChecked={false} />       
-          </FormItem>         
+          { 
+            !collapse && 
+            <div className="collapse-group">
+              <FormItem { ...formItemLayout } label="只选择已选项">
+                <Switch defaultChecked={false} />       
+              </FormItem>
+              <FormItem { ...formItemLayout } label="显示解释">
+                <Switch defaultChecked={true} />       
+              </FormItem>
+              <FormItem { ...formItemLayout } label="添加Redux项目文件夹">
+                <Switch defaultChecked={false} />       
+              </FormItem>
+              <FormItem { ...formItemLayout } label="选择全部">
+                <Switch defaultChecked={false} />       
+              </FormItem>
+            </div>
+          }
           <FormItem { ...formButtonLayout }>
-            <Button className="btn" type="primary" size="default">重置</Button>
-            <Button icon="up" className="btn" size="default">收起</Button>
+            {!collapse && <Button className="btn" type="primary" size="default">重置</Button>}
+            {collapse && <Button onClick={this.onToggleShowOptions} icon="down-circle-o" className="btn" size="default">显示更多选项</Button>}
+            {!collapse && <Button onClick={this.onToggleShowOptions} icon="up-circle-o" className="btn" size="default">收起更多选项</Button>}
           </FormItem>         
         </Form>
       </div>

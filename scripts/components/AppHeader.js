@@ -14,7 +14,7 @@ class AppHeader extends React.Component {
     return (
       <Header>
         <div className="logo">
-          WEBPACK MAKER
+          REACT MAKER
         </div>
         <Menu
           mode="horizontal"
@@ -29,13 +29,13 @@ class AppHeader extends React.Component {
             <Icon type="github" />
             <span>本工具源码</span> 
           </MenuItem>
-          <MenuItem key="app">
-            <Icon type="user" />
-            <span>关于我</span>
-          </MenuItem>
           <MenuItem>
             <Icon type="info-circle-o" />
             <span>意见和建议</span>
+          </MenuItem>
+          <MenuItem key="app">
+            <Icon type="user" />
+            <span>关于我</span>
           </MenuItem>
           <MenuItem>
             <Icon type="coffee" />
