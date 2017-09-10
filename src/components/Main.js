@@ -65,7 +65,10 @@ class Main extends React.Component {
       <SubMenu />
       <Row>
         <Col span={12} offset={6}>
-          <Tree checkable>
+          <Tree
+            checkable
+            defaultExpandAll
+          >
             <TreeNode title={<FolderItem />} >
               <TreeNode title={<FolderItem />}>
                 <TreeNode title={<FileItem />} />            

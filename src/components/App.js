@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect, Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { connect } from 'react-redux';
 
 import { Layout } from 'antd';
 
@@ -9,7 +8,7 @@ import AppFooter from './components/AppFooter.js';
 import Main from './components/Main.js';
 
 import 'antd/dist/antd.css';
-import './app.less';
+import './App.less';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,4 +27,12 @@ class App extends React.Component {
   }
 }
 
-export default App;
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps() {
+  return {};  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
