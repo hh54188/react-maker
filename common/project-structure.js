@@ -5,11 +5,15 @@ import publics from './structure/public.js';
 import src from './structure/src.js';
 import otherFiles from './structure/other-files.js';
 
-const structure = [
-  docs,
-  publics,
-  src,
-  [...otherFiles],
-];
+const appFolderStructure = {
+  name: 'ReactApp',
+  type: FILE_TYPES.FOLDER,
+  children: [
+    docs,
+    publics,
+    src,
+    ...otherFiles,
+  ],
+};
 
-export default structure;
+export default appFolderStructure;

@@ -6,23 +6,18 @@ const publics =  {
   children: [
     {
       name: 'robots.txt',
-      type: FILE_TYPES.FILE,
     },
     {
       name: 'humans.txt',
-      type: FILE_TYPES.FILE,
     },
     {
       name: 'favicon.ico',
-      type: FILE_TYPES.FILE,
     },
     {
       name: 'crossdomain.xml',
-      type: FILE_TYPES.FILE,
     },
     {
       name: 'browserconfig.xml',
-      type: FILE_TYPES.FILE,
     }
   ],
 };

@@ -1,5 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import * as _ from 'lodash';
 
-const store = createStore(reducer, { counter: 0 },  applyMiddleware(thunk));
+import appFolderStructure from '../common/project-structure';
+import reducer from './reducers';
+
+const initialState = {
+  appFolderStructure: _.cloneDeep(appFolderStructure),
+};
+const store = createStore(reducer, initialState,  applyMiddleware(thunk));
+
 export default store;

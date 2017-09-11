@@ -1,4 +1,7 @@
+import React from 'react';
 import { Provider } from 'react-redux';
+import store from './store';
+import App from './components/App';
 
 class AppWrapper extends React.Component {
   constructor(props) {
@@ -7,7 +10,7 @@ class AppWrapper extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Counter />
+        <App />
       </Provider>
     )
   }

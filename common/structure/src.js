@@ -1,8 +1,9 @@
 import FILE_TYPES from '../file-types.js';
 
 const src = {
-  name: 'public',
+  name: 'src',
   type: FILE_TYPES.FOLDER,
+  selected: true,
   children: [
     {
       name: 'components',
@@ -22,11 +23,9 @@ const src = {
     },
     {
       name: 'store.js',
-      type: FILE_TYPES.FILE,        
     },
     {
       name: 'app.js',
-      type: FILE_TYPES.FILE,        
     }
   ]  
 }

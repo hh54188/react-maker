@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import { Layout } from 'antd';
 
-import AppHeader from './components/AppHeader.js';
-import AppFooter from './components/AppFooter.js';
-import Main from './components/Main.js';
+import AppHeader from './AppHeader';
+import AppFooter from './AppFooter';
+import Main from './Main';
 
 import 'antd/dist/antd.css';
 import './App.less';
@@ -15,11 +15,12 @@ class App extends React.Component {
     super(props);
   }
   render() {
+    const { appFolderStructure } = this.props;
     return (
       <div>
       <Layout>
         <AppHeader />
-        <Main />
+        <Main appFolderStructure={appFolderStructure} />
         <AppFooter />
       </Layout>
       </div>
@@ -27,8 +28,8 @@ class App extends React.Component {
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return { ...state };
 }
 
 function mapDispatchToProps() {

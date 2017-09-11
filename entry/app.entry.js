@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from '../scripts/app.js';
+import App from '../src/AppWrapper.js';
 
 ReactDOM.render(
   <App />,
