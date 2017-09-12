@@ -4,6 +4,7 @@ const src = {
   name: 'src',
   type: FILE_TYPES.FOLDER,
   selected: true,
+  expand: true,  
   children: [
     {
       name: 'components',

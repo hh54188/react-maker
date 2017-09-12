@@ -8,6 +8,7 @@ import otherFiles from './structure/other-files.js';
 const appFolderStructure = {
   name: 'ReactApp',
   type: FILE_TYPES.FOLDER,
+  expand: true,  
   children: [
     docs,
     publics,
