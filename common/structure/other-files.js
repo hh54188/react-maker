@@ -72,8 +72,6 @@ const otherFiles =  [
   },
   {
     name: 'webpack.config.prod.js',
-    selected: true,
-    locked: true,    
   },
 ];
 

@@ -1,10 +1,14 @@
-const reducer = (state, action) => {
-  switch(action.type) {
-    case 'INCREMENT': return { counter: state.counter + 1 };
-    case 'FETCH_DATA_COMPLETE': console.log(action.payload); return state; break;
-    case 'FETCH_DATA_ERROR': console.log(action.payload); return state; break;
-    default: return state;
-  }
-}
+import { combineReducers } from 'redux'
+import expandedKeys from 'reducers/expandedKeys';
+import checkedKeys from 'reducers/checkedKeys';
+import appFolderStructure from 'reducers/appFolderStructure';
+import options from 'reducers/options';
+import searchContent from 'reducers/searchContent';
 
-export default reducer;
+export default combineReducers({
+  expandedKeys,
+  checkedKeys,
+  appFolderStructure,
+  options,
+  searchContent,
+});

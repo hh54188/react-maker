@@ -17,8 +17,8 @@ const { Content } = Layout;
 const { Item: FormItem } = Form;
 const { Item: MenuItem } = Menu;
 
-import SubMenu from './SubMenu.js';
-import FILE_TYPES from '../../common/file-types';
+import SubMenu from 'components/SubMenu.js';
+import FILE_TYPES from 'common/file-types';
 
 import './Main.less';
 
@@ -41,22 +41,8 @@ class NodeItem extends React.Component {
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    const { appFolderStructure } = this.props;
-
-    this.initialExpandedKeys = [];
-    this.initialCheckedKeys = [];
-
-    this.computeExpandedKeys.bind(this)(appFolderStructure);
-    this.computeCheckedKeys.bind(this)(appFolderStructure);  
-    
-    // antd的Tree组件有一点坑爹的是，
-    // 当你想标记某个节点是checked或者selected状态时，
-    // 你没法通过在某个节点上标记checked属性来实现，
-    // 只能在“树”的根节点汇总需要checked或者selected的节点的key来实现
-    this.state = {
-      expandedKeys: this.initialExpandedKeys,
-      checkedKeys: this.initialCheckedKeys,
-    };
+    this.onCheckHandler = this.onCheckHandler.bind(this);
+    this.onExpandHandler = this.onExpandHandler.bind(this);
   }
   buildTreeNode(nodeInfo, parentKeys) {
     const { type = FILE_TYPES.FILE, name, children, locked } = nodeInfo;
@@ -72,63 +58,34 @@ class Main extends React.Component {
       </TreeNode>
     );
   }
-  buildTree(appFolderStructure, expandedKeys, checkedKeys) {
-    const onCheckHandler = (checkedKeys, { checked }) => {
-      this.setState({
-        checkedKeys,
-      });
-    };
-    const onExpandHandler = (expandedKeys, { expanded }) => {
-      this.setState({
-        expandedKeys,
-      });
-    }
+  onCheckHandler(checkedKeys, { checked }) {
+    this.props.onCheck(checkedKeys);
+  }
+  onExpandHandler(expandedKeys, { expanded }) {
+    this.props.onExpand(expandedKeys);
+  }
+  buildTree() {
+    const { 
+      appFolderStructure,
+      expandedKeys,
+      checkedKeys,
+      onCheck,
+      onExpand,
+    } = this.props;
     return (
       <Tree
         checkable
         expandedKeys={expandedKeys}
         checkedKeys={checkedKeys}
-        onCheck={onCheckHandler}
-        onExpand={onExpandHandler}
+        onCheck={this.onCheckHandler}
+        onExpand={this.onExpandHandler}
       >
       {appFolderStructure && this.buildTreeNode(appFolderStructure, [])}
       </Tree>
     )
   }
-  /**
-   * 找到需要选中的节点元素
-   * @param {*} appFolderStructure 当前的目录结构
-   * @param {*} parentKeys 祖先元素的keys
-   */
-  computeCheckedKeys(appFolderStructure, parentKeys = []) {
-    const { name, type = FILE_TYPES.FILE, children, selected } = appFolderStructure;
-    const currentKeys = parentKeys.length ? [...parentKeys, `${name}:${type}`] : [`${name}:${type}`];
-    if (selected) {
-      this.initialCheckedKeys.push(currentKeys.join('-'))
-    }
-    children && children.forEach((child) => {
-      this.computeCheckedKeys(child, currentKeys);
-    });
-  }
-  /**
-   * 找到需要展开的节点
-   * @param {*} appFolderStructure 当前的目录结构
-   * @param {*} parentKeys 祖先元素的keys
-   */
-  computeExpandedKeys(appFolderStructure, parentKeys = []) {
-    const { name, type = FILE_TYPES.FILE, children, expand } = appFolderStructure;
-    const currentKeys = parentKeys.length ? [...parentKeys, `${name}:${type}`] : [`${name}:${type}`];
-    if (expand) {
-      this.initialExpandedKeys.push(currentKeys.join('-'))
-    }
-    children && children.forEach((child) => {
-      this.computeExpandedKeys(child, currentKeys);
-    });
-  }
   render() {
-    const { appFolderStructure } = this.props;
-    const { expandedKeys, checkedKeys } = this.state;
-    const tree = this.buildTree(appFolderStructure, expandedKeys, checkedKeys);
+    const tree = this.buildTree();
     return (
       <Content className="app-main">
       <SubMenu />

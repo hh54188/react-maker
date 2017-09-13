@@ -12,7 +12,7 @@ const src = {
     },
     {
       name: 'middlewares',
-      type: FILE_TYPES.FOLDER,  
+      type: FILE_TYPES.FOLDER,
     },
     {
       name: 'actions',

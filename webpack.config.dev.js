@@ -9,8 +9,16 @@ module.exports = {
         app: './entry/app.entry.js',
         tutorial: './entry/tutorial.entry.js'
     },
+    resolve: {
+        alias: {
+            common: path.join(__dirname, 'common'),
+            components: path.join(__dirname, 'src', 'components'),
+            actions: path.join(__dirname, 'src', 'actions'),
+            reducers: path.join(__dirname, 'src', 'reducers'),
+        },
+    },
     output: {
-        path: path.resolve('.'),
+        path: path.join(__dirname, 'public'),
         filename: '[name].bundle.js'
     },   
     module: {

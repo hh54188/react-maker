@@ -49,16 +49,10 @@ class SubMenu extends React.Component {
             !collapse && 
             <div className="collapse-group">
               <FormItem { ...formItemLayout } label="只选择已选项">
-                <Switch defaultChecked={false} />       
+                <Switch checked={false} />       
               </FormItem>
               <FormItem { ...formItemLayout } label="显示解释">
-                <Switch defaultChecked={true} />       
-              </FormItem>
-              <FormItem { ...formItemLayout } label="添加Redux项目文件夹">
-                <Switch defaultChecked={false} />       
-              </FormItem>
-              <FormItem { ...formItemLayout } label="选择全部">
-                <Switch defaultChecked={false} />       
+                <Switch checked={true} />       
               </FormItem>
             </div>
           }
