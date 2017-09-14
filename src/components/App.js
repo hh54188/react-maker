@@ -19,7 +19,11 @@ class App extends React.Component {
   render() {
     const {
       appFolderStructure, expandedKeys, checkedKeys,
-      onCheck, onExpand
+      onCheck, onExpand, 
+      
+      searchContent,
+      onChangeSearchContent,
+      onFilterTree,
     } = this.props;
     return (
       <div>
@@ -29,10 +33,15 @@ class App extends React.Component {
           appFolderStructure={appFolderStructure}
           expandedKeys={expandedKeys}
           checkedKeys={checkedKeys}
+
           onCheck={onCheck}
           onExpand={onExpand}
+
+          searchContent={searchContent}
+          onFilterTree={onFilterTree}
+          onChangeSearchContent={onChangeSearchContent}
         />
-        <AppFooter />
+        <AppFooter enableDownloadBtn={!!checkedKeys.length} />
       </Layout>
       </div>
     )
@@ -45,8 +54,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    onChangeSearchContent: (searchContent) => { dispatch(actions.changeSearchContent(searchContent)) },
     onExpand: (expandedKeys) => { dispatch(actions.updateExpandedKeys(expandedKeys)) },
     onCheck: (checkedKeys) => { dispatch(actions.updateCheckedKeys(checkedKeys)) },
+    onFilterTree: (search) => { dispatch(actions.filterTree(search)) },
   };  
 }
 

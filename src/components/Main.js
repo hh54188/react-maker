@@ -45,7 +45,10 @@ class Main extends React.Component {
     this.onExpandHandler = this.onExpandHandler.bind(this);
   }
   buildTreeNode(nodeInfo, parentKeys) {
-    const { type = FILE_TYPES.FILE, name, children, locked } = nodeInfo;
+    const { type = FILE_TYPES.FILE, name, children, locked, invisible } = nodeInfo;
+    if (invisible) {
+      return null;
+    }
     // 注意这里不要使用parentKeys.push的方式当作当前的key，并且传递给孩子元素，
     // 否则传递的是引用，会引起混乱 
     // 接下来的方法中生产key的原理都会遵循这个原则
@@ -53,7 +56,7 @@ class Main extends React.Component {
     return (
       <TreeNode disableCheckbox={locked ? true : false} key={currentKeys.join('-')} title={<NodeItem {...nodeInfo} />} >
         {children && children.map((child) => {
-          return this.buildTreeNode(child, currentKeys);
+          return invisible ? null : this.buildTreeNode(child, currentKeys);
         })}
       </TreeNode>
     );
@@ -86,9 +89,14 @@ class Main extends React.Component {
   }
   render() {
     const tree = this.buildTree();
+    const { searchContent, onChangeSearchContent, onFilterTree, appFolderStructure } = this.props;
     return (
       <Content className="app-main">
-      <SubMenu />
+      <SubMenu
+        searchContent={searchContent}
+        onChangeSearchContent={onChangeSearchContent}
+        onFilterTree={onFilterTree}
+      />
       <Row>
         <Col span={12} offset={6}>
           {tree}

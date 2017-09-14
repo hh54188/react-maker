@@ -3,7 +3,6 @@ import './SubMenu.less';
 
 import { Switch, Input, Icon, Button, Form, Select, Radio } from 'antd';
 const { Item: FormItem } = Form;
-const { Search } = Input;
 const { Option } = Select;
 
 
@@ -11,14 +10,26 @@ class SubMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      collapse: true
+      collapse: false
     }
     this.onToggleShowOptions = this.onToggleShowOptions.bind(this);
+    this.onSearchChangeHandler = this.onSearchChangeHandler.bind(this);
   }
   onToggleShowOptions() {
     this.setState({
       collapse: !this.state.collapse
     });
+  }
+  onSearchChangeHandler(event) {
+    const {
+      appFolderStructure,
+      onChangeSearchContent,
+      onFilterTree,
+    } = this.props;
+    const content = event.target.value;
+
+    onChangeSearchContent(content);
+    onFilterTree(content);
   }
   render() {
     const formItemLayout = {
@@ -39,20 +50,18 @@ class SubMenu extends React.Component {
       }      
     }
     const { collapse } = this.state;
+    const { searchContent } = this.props;
     return (
       <div className="sub-menu">    
         <Form style={{ width: '960px' }}>
           <FormItem { ...formItemLayout } label="搜索目录或者文件名称">
-            <Input />          
+            <Input value={searchContent} onChange={this.onSearchChangeHandler} />          
           </FormItem>
           { 
             !collapse && 
             <div className="collapse-group">
               <FormItem { ...formItemLayout } label="只选择已选项">
                 <Switch checked={false} />       
-              </FormItem>
-              <FormItem { ...formItemLayout } label="显示解释">
-                <Switch checked={true} />       
               </FormItem>
             </div>
           }

@@ -10,6 +10,7 @@ class AppFooter extends React.Component {
     super(props);
   }
   render() {
+    const { enableDownloadBtn } = this.props;
     return (
       <Footer className="app-footer">
         <Row>
@@ -20,7 +21,7 @@ class AppFooter extends React.Component {
               style={{ lineHeight: '64px' }}
             >
               <MenuItem key="download">
-                <Button type="primary" icon="download">下载</Button>
+                <Button disabled={!enableDownloadBtn} type="primary" icon="download">下载</Button>
               </MenuItem>
             </Menu>
           </Col>

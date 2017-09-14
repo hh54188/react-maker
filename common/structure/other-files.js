@@ -49,7 +49,6 @@ const otherFiles =  [
   {
     name: 'package.json',
     selected: true,
-    locked: true,
   },
   {
     name: 'README.md',
@@ -60,7 +59,6 @@ const otherFiles =  [
   {
     name: '.babelrc',
     selected: true,
-    locked: true,    
   },
   {
     name: 'Profile',
@@ -68,7 +66,6 @@ const otherFiles =  [
   {
     name: 'webpack.config.dev.js',
     selected: true,
-    locked: true,    
   },
   {
     name: 'webpack.config.prod.js',

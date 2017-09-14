@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 
 import appFolderStructure from 'common/project-structure';
 import FILE_TYPES from 'common/file-types';
-
+import { filterNode } from './util';
 import reducer from 'reducers';
 
 const initialCheckedKeys = [];
@@ -32,16 +32,14 @@ const initialExpandedKeys = [];
   });
 })(appFolderStructure);
 
-// computeCheckedKeys(appFolderStructure);
-// computeExpandedKeys(appFolderStructure);
+const searchContent = '';
 
 const initialState = {
-  appFolderStructure: _.cloneDeep(appFolderStructure),
+  appFolderStructure: filterNode(_.cloneDeep(appFolderStructure), searchContent),
   expandedKeys: [...initialExpandedKeys],
   checkedKeys: [...initialCheckedKeys],
-  searchContent: '',
+  searchContent,
   options: {
-    showExplain: true,
     showChecked: false,
   }
 };
