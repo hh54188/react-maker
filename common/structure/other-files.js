@@ -48,7 +48,7 @@ const otherFiles =  [
   },
   {
     name: 'package.json',
-    selected: true,
+    checked: true,
   },
   {
     name: 'README.md',
@@ -58,14 +58,14 @@ const otherFiles =  [
   },
   {
     name: '.babelrc',
-    selected: true,
+    checked: true,
   },
   {
     name: 'Profile',
   },
   {
     name: 'webpack.config.dev.js',
-    selected: true,
+    checked: true,
   },
   {
     name: 'webpack.config.prod.js',

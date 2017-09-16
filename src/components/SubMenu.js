@@ -14,6 +14,7 @@ class SubMenu extends React.Component {
     }
     this.onToggleShowOptions = this.onToggleShowOptions.bind(this);
     this.onSearchChangeHandler = this.onSearchChangeHandler.bind(this);
+    this.onSwitchChangeHandler = this.onSwitchChangeHandler.bind(this);
   }
   onToggleShowOptions() {
     this.setState({
@@ -24,12 +25,24 @@ class SubMenu extends React.Component {
     const {
       appFolderStructure,
       onChangeSearchContent,
-      onFilterTree,
+      showCheckedOnly,
+      checkedKeys,
     } = this.props;
     const content = event.target.value;
+    onChangeSearchContent(content, appFolderStructure, showCheckedOnly, checkedKeys);
+  }
+  onSwitchChangeHandler(checked) {
+    const { onToggleShowCheckedOnly } = this.props;
+    onToggleShowCheckedOnly(checked);
 
-    onChangeSearchContent(content);
-    onFilterTree(content);
+    const {
+      searchContent,
+      appFolderStructure,
+      onChangeSearchContent,
+      showCheckedOnly,
+      checkedKeys,
+    } = this.props;
+    onChangeSearchContent(searchContent, appFolderStructure, checked, checkedKeys);    
   }
   render() {
     const formItemLayout = {
@@ -50,7 +63,7 @@ class SubMenu extends React.Component {
       }      
     }
     const { collapse } = this.state;
-    const { searchContent } = this.props;
+    const { searchContent, showCheckedOnly } = this.props;
     return (
       <div className="sub-menu">    
         <Form style={{ width: '960px' }}>
@@ -61,7 +74,7 @@ class SubMenu extends React.Component {
             !collapse && 
             <div className="collapse-group">
               <FormItem { ...formItemLayout } label="只选择已选项">
-                <Switch checked={false} />       
+                <Switch onChange={this.onSwitchChangeHandler} checked={showCheckedOnly} />       
               </FormItem>
             </div>
           }

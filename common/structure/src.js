@@ -3,7 +3,7 @@ import FILE_TYPES from '../file-types.js';
 const src = {
   name: 'src',
   type: FILE_TYPES.FOLDER,
-  selected: true,
+  checked: true,
   expand: true,  
   children: [
     {
@@ -27,6 +27,7 @@ const src = {
     },
     {
       name: 'app.js',
+      checked: true,
     }
   ]  
 }

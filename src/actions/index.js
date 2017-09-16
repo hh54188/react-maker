@@ -1,5 +1,12 @@
 import * as actionTypes from 'actions/actionTypes';
 
+export const showCheckedOnly = (showCheckedOnly) => {
+  return {
+    type: actionTypes.TOGGLE_SHOW_CHECKED_ONLY,
+    payload: showCheckedOnly,
+  }
+}
+
 export const updateExpandedKeys = (expandedKeys) => {
   return {
     type: actionTypes.UPDATE_EXPANDED_KEYS,
@@ -21,9 +28,23 @@ export const changeSearchContent = (searchContent) => {
   }
 }
 
-export const filterTree = (filterContent) => {
+export const filterTree = (filterContent, showCheckedOnly, checkedKeys) => {
   return {
     type: actionTypes.FILTER_TREE,
-    payload: filterContent,
+    payload: {
+      filterContent,
+      showCheckedOnly,
+      checkedKeys,
+    },
+  }
+}
+
+export const reomputeExpandedKeys = (searchContent, appFolderStructure) => {
+  return {
+    type: actionTypes.RECOMPUTE_EXPANDED_KEYS,
+    payload: {
+      searchContent,
+      appFolderStructure,
+    },
   }
 }

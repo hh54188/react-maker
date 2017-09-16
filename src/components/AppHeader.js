@@ -19,7 +19,7 @@ class AppHeader extends React.Component {
         <Menu
           mode="horizontal"
           theme="dark"
-          defaultSelectedKeys={['home']}
+          defaultcheckedKeys={['home']}
           style={{ 
             lineHeight: '64px',
             display: 'flex',

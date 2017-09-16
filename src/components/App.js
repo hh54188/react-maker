@@ -23,7 +23,9 @@ class App extends React.Component {
       
       searchContent,
       onChangeSearchContent,
-      onFilterTree,
+
+      onToggleShowCheckedOnly,
+      showCheckedOnly
     } = this.props;
     return (
       <div>
@@ -36,9 +38,11 @@ class App extends React.Component {
 
           onCheck={onCheck}
           onExpand={onExpand}
+          
+          showCheckedOnly={showCheckedOnly}
+          onToggleShowCheckedOnly={onToggleShowCheckedOnly}
 
           searchContent={searchContent}
-          onFilterTree={onFilterTree}
           onChangeSearchContent={onChangeSearchContent}
         />
         <AppFooter enableDownloadBtn={!!checkedKeys.length} />
@@ -54,10 +58,14 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeSearchContent: (searchContent) => { dispatch(actions.changeSearchContent(searchContent)) },
+    onChangeSearchContent: (searchContent, appFolderStructure, showCheckedOnly, checkedKeys) => {
+      dispatch(actions.changeSearchContent(searchContent));
+      dispatch(actions.filterTree(searchContent, showCheckedOnly, checkedKeys));
+      dispatch(actions.reomputeExpandedKeys(searchContent, appFolderStructure));
+    },
+    onToggleShowCheckedOnly: (showCheckedOnly) => { dispatch(actions.showCheckedOnly(showCheckedOnly)) },
     onExpand: (expandedKeys) => { dispatch(actions.updateExpandedKeys(expandedKeys)) },
     onCheck: (checkedKeys) => { dispatch(actions.updateCheckedKeys(checkedKeys)) },
-    onFilterTree: (search) => { dispatch(actions.filterTree(search)) },
   };  
 }
 

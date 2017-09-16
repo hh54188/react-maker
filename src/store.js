@@ -1,19 +1,19 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import * as _ from 'lodash';
 
 import appFolderStructure from 'common/project-structure';
 import FILE_TYPES from 'common/file-types';
-import { filterNode } from './util';
+import { filterNodeBySearch } from './util';
 import reducer from 'reducers';
 
 const initialCheckedKeys = [];
 const initialExpandedKeys = [];
+const searchContent = '';
 
 (function computeCheckedKeys(appFolderStructure, parentKeys = []) {
-  const { name, type = FILE_TYPES.FILE, children, selected } = appFolderStructure;
+  const { name, type = FILE_TYPES.FILE, children, checked } = appFolderStructure;
   const currentKeys = parentKeys.length ? [...parentKeys, `${name}:${type}`] : [`${name}:${type}`];
-  if (selected) {
+  if (checked) {
     initialCheckedKeys.push(currentKeys.join('-'))
   }
   children && children.forEach((child) => {
@@ -32,16 +32,15 @@ const initialExpandedKeys = [];
   });
 })(appFolderStructure);
 
-const searchContent = '';
+console.log('initialExpandedKeys--->', initialExpandedKeys);
+console.log('initialCheckedKeys--->', initialCheckedKeys);
 
 const initialState = {
-  appFolderStructure: filterNode(_.cloneDeep(appFolderStructure), searchContent),
-  expandedKeys: [...initialExpandedKeys],
-  checkedKeys: [...initialCheckedKeys],
+  appFolderStructure: filterNodeBySearch(appFolderStructure, searchContent),
+  expandedKeys: initialExpandedKeys,
+  checkedKeys: initialCheckedKeys,
+  showCheckedOnly: false,
   searchContent,
-  options: {
-    showChecked: false,
-  }
 };
 const store = createStore(reducer, initialState,  applyMiddleware(thunk));
 
