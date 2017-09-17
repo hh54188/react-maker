@@ -15,6 +15,18 @@ class SubMenu extends React.Component {
     this.onToggleShowOptions = this.onToggleShowOptions.bind(this);
     this.onSearchChangeHandler = this.onSearchChangeHandler.bind(this);
     this.onSwitchChangeHandler = this.onSwitchChangeHandler.bind(this);
+    this.onResetHandler = this.onResetHandler.bind(this);
+  }
+  onResetHandler(event) {
+    const {
+      appFolderStructure,
+      checkedKeys,
+      onChangeSearchContent,
+      onToggleShowCheckedOnly,
+    } = this.props;
+
+    onChangeSearchContent('', appFolderStructure, false, checkedKeys);       
+    onToggleShowCheckedOnly(false);
   }
   onToggleShowOptions() {
     this.setState({
@@ -79,9 +91,9 @@ class SubMenu extends React.Component {
             </div>
           }
           <FormItem { ...formButtonLayout }>
-            {!collapse && <Button className="btn" type="primary" size="default">重置</Button>}
-            {collapse && <Button onClick={this.onToggleShowOptions} icon="down-circle-o" className="btn" size="default">显示更多选项</Button>}
-            {!collapse && <Button onClick={this.onToggleShowOptions} icon="up-circle-o" className="btn" size="default">收起更多选项</Button>}
+            {!collapse && <Button onClick={this.onResetHandler} className="btn" type="primary" size="default">重置</Button>}
+            {/* {collapse && <Button onClick={this.onToggleShowOptions} icon="down-circle-o" className="btn" size="default">显示更多选项</Button>}
+            {!collapse && <Button onClick={this.onToggleShowOptions} icon="up-circle-o" className="btn" size="default">收起更多选项</Button>} */}
           </FormItem>         
         </Form>
       </div>

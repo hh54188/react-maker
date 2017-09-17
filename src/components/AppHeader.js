@@ -19,20 +19,17 @@ class AppHeader extends React.Component {
         <Menu
           mode="horizontal"
           theme="dark"
-          defaultcheckedKeys={['home']}
           style={{ 
             lineHeight: '64px',
             display: 'flex',
             justifyContent: 'flex-end' 
           }}
         >
-          <MenuItem key="home">
-            <Icon type="home" />
-            <span>工具</span>
-          </MenuItem>
           <MenuItem key="mail">
-            <Icon type="github" />
-            <span>本工具源码</span>
+            <a href="http://example.com" target="_blank">
+              <Icon type="github" />
+              <span>本工具源码</span>
+            </a>
           </MenuItem>
           <MenuItem>
             <Icon type="info-circle-o" />

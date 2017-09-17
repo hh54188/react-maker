@@ -14,7 +14,19 @@ const searchContent = '';
   const { name, type = FILE_TYPES.FILE, children, checked } = appFolderStructure;
   const currentKeys = parentKeys.length ? [...parentKeys, `${name}:${type}`] : [`${name}:${type}`];
   if (checked) {
-    initialCheckedKeys.push(currentKeys.join('-'))
+    initialCheckedKeys.push(currentKeys.join('-'));
+    // 如果当前选项被勾选
+    // 则需要保证当前选项的父选项被勾选
+    // 并且祖祖辈辈被勾选
+    let currentKeysLength = currentKeys.length;
+    while (currentKeysLength) {
+      const parentKeyPairs = currentKeys.slice(0, currentKeysLength - 1);
+      const parentKeyStr = parentKeyPairs.join('-');
+      if (initialCheckedKeys.indexOf(parentKeyStr) < 0) {
+        initialCheckedKeys.push(parentKeyStr);
+      }
+      currentKeysLength--;
+    }    
   }
   children && children.forEach((child) => {
     computeCheckedKeys(child, currentKeys);
